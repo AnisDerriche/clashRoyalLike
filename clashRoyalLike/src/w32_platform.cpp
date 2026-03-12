@@ -1,7 +1,6 @@
 #include <windows.h>
 #include "cpp.hint"
 #include "utils.h"
-#include "utils.cpp"
 
 global_variable bool running = true;
 
@@ -15,12 +14,8 @@ struct Render_State {
 global_variable Render_State render_state;
 
 #include "platform_common.h"
-#include "renderer.h"
 #include "game.h"
-
-#include "platform_common.cpp"
-#include "renderer.cpp"
-#include "game.cpp"
+#include "renderer.h"
 
 LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	LRESULT result = 0;
