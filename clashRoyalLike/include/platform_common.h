@@ -8,8 +8,8 @@ typedef unsigned int u32;
 typedef long long s64;
 typedef unsigned long long u64;
 
-#define global_variable static;
-#define internal static;
+#define global_variable static
+#define internal static
 
 struct Button_State {
 	bool is_down;

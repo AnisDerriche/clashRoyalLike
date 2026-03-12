@@ -1,8 +1,7 @@
 #include <windows.h>
-#include "cpp.hint"
 #include "utils.h"
 
-global_variable bool running = true;
+static bool running = true;
 
 struct Render_State {
 	int height, width;
@@ -11,7 +10,7 @@ struct Render_State {
 	BITMAPINFO bitmap_info;
 };
 
-global_variable Render_State render_state;
+static Render_State render_state;
 
 #include "platform_common.h"
 #include "game.h"
@@ -68,13 +67,13 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 	// Create Window
 	HWND window = CreateWindow(window_class.lpszClassName, L"Incremental Game", WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 1280, 720, 0, 0, hInstance, 0);
-	{
-		//Fullscreen
-		SetWindowLong(window, GWL_STYLE, GetWindowLong(window, GWL_STYLE) & ~WS_OVERLAPPEDWINDOW);
-		MONITORINFO mi = { sizeof(mi) };
-		GetMonitorInfo(MonitorFromWindow(window, MONITOR_DEFAULTTOPRIMARY), &mi);
-		SetWindowPos(window, HWND_TOP, mi.rcMonitor.left, mi.rcMonitor.top, mi.rcMonitor.right - mi.rcMonitor.left, mi.rcMonitor.bottom - mi.rcMonitor.top, SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
-	}
+	// {
+	// 	//Fullscreen
+	// 	SetWindowLong(window, GWL_STYLE, GetWindowLong(window, GWL_STYLE) & ~WS_OVERLAPPEDWINDOW);
+	// 	MONITORINFO mi = { sizeof(mi) };
+	// 	GetMonitorInfo(MonitorFromWindow(window, MONITOR_DEFAULTTOPRIMARY), &mi);
+	// 	SetWindowPos(window, HWND_TOP, mi.rcMonitor.left, mi.rcMonitor.top, mi.rcMonitor.right - mi.rcMonitor.left, mi.rcMonitor.bottom - mi.rcMonitor.top, SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+	// }
 
 	HDC hdc = GetDC(window);
 

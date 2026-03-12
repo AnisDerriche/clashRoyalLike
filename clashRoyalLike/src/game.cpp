@@ -1,4 +1,3 @@
-#include "cpp.hint"
 #include "game.h"
 #include "platform_common.h"
 
@@ -6,7 +5,6 @@
 #define pressed(b) (input->buttons[b].is_down && input->buttons[b].changed)
 #define released(b) (!input->buttons[b].is_down && input->buttons[b].changed)
 
-internal void
-simulate_game(Input* input, float dt) {
+void simulate_game(Input* input, float dt) {
 
 }
