@@ -1,0 +1,40 @@
+# --- DOSSIERS DE COMPILATION ---
+[Xx]64/
+[Dd]ebug/
+[Rr]elease/
+[Aa]rm64/
+bin/
+obj/
+
+# --- FICHIERS LIÉS À VISUAL STUDIO ---
+.vs/
+*.user
+*.suo
+*.sln.docstates
+*.opendb
+*.db
+
+# --- FICHIERS TEMPORAIRES C++ ---
+*.obj
+*.pch
+*.tlog
+*.lastbuildstate
+*.idb
+*.pdb
+*.ilk
+*.exe
+*.recipe
+*.ipch
+
+# --- FICHIERS SYSTÈME ---
+.DS_Store
+Thumbs.db
+
+# --- EXCEPTIONS ---
+!README.md
+!clashRoyalLike.slnx
+!clashRoyalLike/assets/
+!clashRoyalLike/include/
+!clashRoyalLike/src/
+!clashRoyalLike/*.vcxproj
+!clashRoyalLike/*.filters
