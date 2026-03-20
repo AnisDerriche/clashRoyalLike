@@ -1,0 +1,22 @@
+{
+  "name": "clash-royal-like",
+  "version": "0.1.0",
+  "dependencies": [
+    {
+      "name": "sfml",
+      "features": [
+        "graphics",
+        "window",
+        "network",
+        "audio"
+      ]
+    },
+    "drogon",
+    "libpqxx",
+    "protobuf",
+    "cpr",
+    "jwt-cpp",
+    "nlohmann-json",
+    "redis-plus-plus"
+  ]
+}

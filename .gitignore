@@ -1,40 +1,68 @@
-# --- DOSSIERS DE COMPILATION ---
-[Xx]64/
-[Dd]ebug/
-[Rr]elease/
-[Aa]rm64/
-bin/
-obj/
-
-# --- FICHIERS LIÉS À VISUAL STUDIO ---
-.vs/
-*.user
-*.suo
-*.sln.docstates
-*.opendb
-*.db
-
-# --- FICHIERS TEMPORAIRES C++ ---
-*.obj
-*.pch
-*.tlog
-*.lastbuildstate
-*.idb
-*.pdb
-*.ilk
-*.exe
-*.recipe
-*.ipch
-
-# --- FICHIERS SYSTÈME ---
+# --- GÉNÉRAL ---
 .DS_Store
 Thumbs.db
+*.log
+*.tmp
 
-# --- EXCEPTIONS ---
-!README.md
-!clashRoyalLike.slnx
-!clashRoyalLike/assets/
-!clashRoyalLike/include/
-!clashRoyalLike/src/
-!clashRoyalLike/*.vcxproj
-!clashRoyalLike/*.filters
+# --- VISUAL STUDIO / CMAKE ---
+# Ignore le dossier de sortie de compilation (très lourd)
+out/
+# Ignore les réglages locaux de Visual Studio
+.vs/
+# Fichiers de projet utilisateur
+*.user
+*.suo
+*.pdb
+*.ilk
+*.aps
+*.ncb
+*.opendb
+*.sdf
+*.cache
+
+# --- CMAKE GÉNÉRÉS ---
+# Si tu compiles en ligne de commande en dehors de VS
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+_deps/
+
+# --- VCPKG (DÉPENDANCES) ---
+# Ne JAMAIS pousser les bibliothèques compilées (vcpkg les réinstallera)
+vcpkg_installed/
+# Fichiers de log d'installation
+vcpkg-manifest-install.log
+
+# --- EXÉCUTABLES ET BINAIRES ---
+*.exe
+*.dll
+*.so
+*.dylib
+*.lib
+*.a
+*.obj
+*.o
+*.exp
+
+# --- PROTOBUF (GÉNÉRÉS) ---
+# On ignore les fichiers .pb.h et .pb.cc car ils doivent être générés localement
+# selon la version de protoc installée.
+common/include/network/*.pb.h
+common/include/network/*.pb.cc
+common/src/network/*.pb.cc
+
+# --- DOCKER & DATABASES ---
+.docker/
+# Données persistantes des bases de données (si tu les montes en local)
+infra/postgres/data/
+infra/redis/data/
+# Fichiers secrets (clés JWT, mots de passe DB)
+.env
+.env.local
+
+# --- IDE (AUTRES) ---
+.vscode/
+.idea/
+*.swp

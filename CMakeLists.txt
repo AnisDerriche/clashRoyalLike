@@ -1,28 +1,27 @@
-cmake_minimum_required(VERSION 3.20)
-project(clashRoyalLike)
+﻿cmake_minimum_required(VERSION 3.20)
+# Change le nom ici pour la cohérence
+project(clashRoyalLike) 
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
-# On inclut le dossier où sont tes fichiers .h
-include_directories(clashRoyalLike/include)
+# --- SFML 3 ---
+find_package(SFML CONFIG REQUIRED COMPONENTS Graphics Window Network Audio System)
 
-# Active le support Unicode pour éviter les erreurs de L"String"
-add_definitions(-DUNICODE -D_UNICODE)
+# --- REDIS (Ordre important pour éviter l'erreur hiredis) ---
+find_package(hiredis CONFIG REQUIRED)
+find_package(redis++ CONFIG REQUIRED)
 
-# On liste tous tes fichiers sources .cpp
-# Note l'ajout de WIN32 pour supprimer la console
-add_executable(clashRoyalLike WIN32
-        clashRoyalLike/src/game.cpp
-        clashRoyalLike/src/platform_common.cpp
-        clashRoyalLike/src/renderer.cpp
-        clashRoyalLike/src/utils.cpp
-        clashRoyalLike/src/w32_platform.cpp
-)
+# --- POSTGRES ---
+find_package(libpqxx CONFIG REQUIRED)
 
-# Le "Hack" pour garder le int main() classique sans erreur de Linker
-if(MSVC)
-    set_target_properties(clashRoyalLike PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
-endif()
+# --- BACKEND & TOOLS ---
+find_package(Drogon CONFIG REQUIRED)
+find_package(Protobuf REQUIRED)
+find_package(cpr CONFIG REQUIRED)
+find_package(jwt-cpp CONFIG REQUIRED)
+find_package(nlohmann_json CONFIG REQUIRED)
 
-# Indispensable pour WinMain et l'affichage graphique sous Windows
-target_link_libraries(clashRoyalLike user32 gdi32)
+# --- INCLUSION DES DOSSIERS ---
+add_subdirectory(common)
+add_subdirectory(client)
+add_subdirectory(backend/api-service)
