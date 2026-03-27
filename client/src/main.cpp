@@ -37,7 +37,7 @@ int main() {
 
 			switch (currentState) {
 			case State::MAIN_MENU:
-				simulate_menu(delta_time, currentState);
+				//simulate_menu(delta_time, currentState);
 				break;
 
 			case State::IN_GAME:
@@ -48,14 +48,14 @@ int main() {
 		}
 		window.clear(sf::Color(100, 149, 237));
 
-		/*		// On choisit quoi dessiner en fonction de l'état
-				if (currentState == State::MAIN_MENU) {
-					// Ici tu appelleras tes fonctions de dessin du menu
-					// ex: draw_menu(window);
-				}
-				else if (currentState == State::IN_GAME) {
-					// ex: draw_game(window);
-				}*/
+		// On choisit quoi dessiner en fonction de l'état
+		if (currentState == State::MAIN_MENU) {
+			// Ici tu appelleras tes fonctions de dessin du menu
+			// ex: draw_menu(window);
+		}
+		else if (currentState == State::IN_GAME) {
+			// ex: draw_game(window);
+		}
 
 		window.display();
 	}

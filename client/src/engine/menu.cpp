@@ -5,7 +5,6 @@
 #include "utils.h"
 using namespace std;
 
-
 internal
 void simulate_menu(float dt, State& currentState) {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter)) {
