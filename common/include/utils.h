@@ -9,5 +9,5 @@ typedef unsigned int u32;
 typedef long long s64;
 typedef unsigned long long u64;
 
-#define internal static
-#define global_variable static
+#define CORE_INTERNAL static
+#define CORE_GLOBAL static
