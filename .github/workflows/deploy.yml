@@ -21,12 +21,11 @@ jobs:
         run: docker save -o server-image.tar royal-arena-server:latest
 
       - name: Transfer Image to Production Server
-        # Adapte l'IP, l'utilisateur et le chemin selon les directives du Sys Admin (ici 10.0.0.53 et /opt/royal-arena-server/)
-        run: scp -o StrictHostKeyChecking=no server-image.tar docker-compose.yml royal-arena-server@10.0.0.53:/opt/royal-arena-server/
+        run: scp -o StrictHostKeyChecking=no server-image.tar docker-compose.yml ra-server@10.0.0.54:/opt/royal-arena-server/
 
       - name: Deploy on Production Server
         run: |
-          ssh -o StrictHostKeyChecking=no royal-arena-server@10.0.0.53 << 'EOF'
+          ssh -o StrictHostKeyChecking=no ra-server@10.0.0.54 << 'EOF'
             cd /opt/royal-arena-server
             docker load -i server-image.tar
             docker compose up -d
