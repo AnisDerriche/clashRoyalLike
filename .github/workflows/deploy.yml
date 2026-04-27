@@ -26,7 +26,7 @@ jobs:
 
       - name: Deploy on Production Server
         run: |
-          ssh -o StrictHostKeyChecking=no royal-arena-server@10.0.0.53 << 'EOF'
+          ssh -o StrictHostKeyChecking=no ra-server@10.0.0.54 << 'EOF'
             cd /opt/royal-arena-server
             docker load -i server-image.tar
             docker compose up -d
