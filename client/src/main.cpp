@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
 #include <iostream>
+#include <fstream>
 #include <cstdint>
 #include "states.h"
 #include "menu.h"
@@ -13,8 +14,8 @@ int main() {
 	// 1. Paramètres de la fenêtre
 	const sf::Vector2u windowSize(800, 1000);
 	
-	// Mode sans bordure (Style::None)
-	sf::RenderWindow window(sf::VideoMode(windowSize), "Royal Arena Client", sf::Style::None);
+	// Mode par défaut (avec barre de titre pour pouvoir la déplacer)
+	sf::RenderWindow window(sf::VideoMode(windowSize), "Royal Arena Client", sf::Style::Default);
 	window.setFramerateLimit(60);
 
 	// 2. Centrer la fenêtre sur l'écran
@@ -34,7 +35,19 @@ int main() {
 	// Network
 	sf::UdpSocket socket;
 	socket.setBlocking(false);
-	auto serverIp = sf::IpAddress::resolve("127.0.0.1");
+	
+	// Lecture de l'IP du serveur depuis un fichier ou fallback en local
+	std::string ipString = "127.0.0.1";
+	std::ifstream ipFile("server_ip.txt");
+	if (ipFile.is_open()) {
+		std::getline(ipFile, ipString);
+		ipFile.close();
+		cout << "IP du serveur chargee depuis server_ip.txt : " << ipString << endl;
+	} else {
+		cout << "Fichier server_ip.txt introuvable, utilisation de localhost : " << ipString << endl;
+	}
+
+	auto serverIp = sf::IpAddress::resolve(ipString);
 	std::uint16_t serverPort = 50000;
 
 	if (serverIp) {
@@ -63,8 +76,20 @@ int main() {
 				if (keyPressed->code == sf::Keyboard::Key::Escape) {
 					window.close();
 				}
-				if (currentState == State::MAIN_MENU && keyPressed->code == sf::Keyboard::Key::Enter) {
-					currentState = State::IN_GAME;
+				if (currentState == State::MAIN_MENU) {
+					if (keyPressed->code == sf::Keyboard::Key::Enter) {
+						currentState = State::IN_GAME;
+					}
+					if (keyPressed->code == sf::Keyboard::Key::S) {
+						if (battle.getClientSide() == Side::PLAYER) {
+							battle.setClientSide(Side::ENEMY);
+							gameView.setRotation(sf::Degrees(180.f));
+						} else {
+							battle.setClientSide(Side::PLAYER);
+							gameView.setRotation(sf::Degrees(0.f));
+						}
+						cout << "Side toggled to: " << (battle.getClientSide() == Side::PLAYER ? "PLAYER" : "ENEMY") << endl;
+					}
 				}
 			}
 		}
@@ -84,7 +109,7 @@ int main() {
 
 		if (currentState == State::MAIN_MENU) {
 			simulate_menu(delta_time, currentState);
-			draw_menu(window);
+			draw_menu(window, battle.getClientSide());
 		}
 		else if (currentState == State::IN_GAME) {
 			window.setView(gameView);

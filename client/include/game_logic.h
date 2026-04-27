@@ -63,6 +63,7 @@ public:
 
     // Networking
     void setClientSide(Side side) { clientSide = side; }
+    Side getClientSide() const { return clientSide; }
     std::string serialize();
     void deserialize(const std::string& data);
     void setNetwork(sf::UdpSocket* socket, sf::IpAddress ip, std::uint16_t port);

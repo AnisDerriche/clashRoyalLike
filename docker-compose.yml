@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  battle-server:
+    image: royal-arena-server:latest
+    container_name: royal-arena-server
+    restart: unless-stopped
+    ports:
+      - "50000:50000/udp"
+    # network_mode: "host" # Optionnel: Peut être utile pour les perfs réseau brutes sur UDP
