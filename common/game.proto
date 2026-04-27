@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package game;
+
+message Vector2 {
+    float x = 1;
+    float y = 2;
+}
+
+message EntityState {
+    uint32 id = 1;
+    Vector2 position = 2;
+    float health = 3;
+    float max_health = 4;
+    int32 side = 5; // 0: PLAYER, 1: ENEMY
+    bool is_tower = 6;
+    uint32 color_rgb = 7;
+}
+
+message GameState {
+    repeated EntityState entities = 1;
+    float player_elixir = 2;
+    float enemy_elixir = 3;
+    bool game_over = 4;
+    int32 winner = 5;
+}
+
+message SpawnRequest {
+    int32 card_index = 1;
+    Vector2 position = 2;
+}
