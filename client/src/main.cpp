@@ -83,10 +83,10 @@ int main() {
 					if (keyPressed->code == sf::Keyboard::Key::S) {
 						if (battle.getClientSide() == Side::PLAYER) {
 							battle.setClientSide(Side::ENEMY);
-							gameView.setRotation(sf::Degrees(180.f));
+							gameView.setRotation(sf::degrees(180.f));
 						} else {
 							battle.setClientSide(Side::PLAYER);
-							gameView.setRotation(sf::Degrees(0.f));
+							gameView.setRotation(sf::degrees(0.f));
 						}
 						cout << "Side toggled to: " << (battle.getClientSide() == Side::PLAYER ? "PLAYER" : "ENEMY") << endl;
 					}

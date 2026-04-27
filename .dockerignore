@@ -1,0 +1,56 @@
+# Git
+.git
+.gitignore
+.github
+
+# Client
+client/
+
+# Build directories
+out/
+build/
+CMakeFiles/
+_deps/
+
+# Visual Studio / IDEs
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.swp
+
+# Dependencies
+vcpkg_installed/
+vcpkg-manifest-install.log
+
+# Binaries and objects
+*.exe
+*.dll
+*.so
+*.dylib
+*.lib
+*.a
+*.obj
+*.o
+*.exp
+*.pdb
+
+# Protobuf generated files
+common/include/network/*.pb.h
+common/include/network/*.pb.cc
+common/src/network/*.pb.cc
+
+# Environment and secrets
+.env
+.env.local
+*.log
+
+# Infrastructure data
+infra/**/data/
+
+# Docker
+Dockerfile
+docker-compose.yml
+.docker/
+.dockerignore
